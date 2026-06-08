@@ -28,7 +28,13 @@ export function BlogPostForm({ initialData, onSuccess }) {
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: initialData || {},
+    defaultValues: initialData ? {
+      title: initialData.title || "",
+      excerpt: initialData.excerpt || "",
+      content: initialData.content || "",
+      metaTitle: initialData.metaTitle || "",
+      metaDesc: initialData.metaDesc || "",
+    } : {},
   });
 
   async function onSubmit(data) {

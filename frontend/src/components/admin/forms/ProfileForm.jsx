@@ -34,7 +34,23 @@ export default function ProfileForm() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(schema) });
 
   useEffect(() => {
-    getProfile().then((p) => { setProfile(p); reset(p); }).catch(() => {});
+    getProfile().then((p) => {
+      setProfile(p);
+      reset({
+        name: p.name || "",
+        title: p.title || "",
+        bio: p.bio || "",
+        email: p.email || "",
+        phone: p.phone || "",
+        location: p.location || "",
+        githubUrl: p.githubUrl || "",
+        linkedinUrl: p.linkedinUrl || "",
+        twitterUrl: p.twitterUrl || "",
+        websiteUrl: p.websiteUrl || "",
+        yearsOfExp: p.yearsOfExp ?? 0,
+        projectsCount: p.projectsCount ?? 0,
+      });
+    }).catch(() => {});
   }, [reset]);
 
   async function onSubmit(data) {

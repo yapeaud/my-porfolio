@@ -20,7 +20,14 @@ const schema = z.object({
 export function EducationForm({ initialData, onSuccess }) {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: initialData || { startYear: new Date().getFullYear() },
+    defaultValues: initialData ? {
+      school: initialData.school || "",
+      degree: initialData.degree || "",
+      field: initialData.field || "",
+      startYear: initialData.startYear || new Date().getFullYear(),
+      endYear: initialData.endYear || "",
+      description: initialData.description || "",
+    } : { startYear: new Date().getFullYear(), endYear: "", description: "" },
   });
 
   async function onSubmit(data) {

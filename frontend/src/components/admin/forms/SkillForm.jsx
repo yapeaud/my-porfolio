@@ -20,7 +20,7 @@ const schema = z.object({
 export function SkillForm({ initialData, onSuccess }) {
   const { register, handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: initialData || { level: 50, order: 0 },
+    defaultValues: initialData || { name: "", category: "", level: 50, order: 0 },
   });
 
   async function onSubmit(data) {

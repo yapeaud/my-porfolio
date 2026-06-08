@@ -21,7 +21,14 @@ export function ExperienceForm({ initialData, onSuccess }) {
   const fmtDate = (d) => d ? new Date(d).toISOString().split("T")[0] : "";
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: initialData ? { ...initialData, startDate: fmtDate(initialData.startDate), endDate: fmtDate(initialData.endDate) } : {},
+    defaultValues: initialData ? {
+      company: initialData.company || "",
+      position: initialData.position || "",
+      startDate: fmtDate(initialData.startDate),
+      endDate: fmtDate(initialData.endDate),
+      description: initialData.description || "",
+      location: initialData.location || "",
+    } : {},
   });
 
   async function onSubmit(data) {

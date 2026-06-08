@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { DarkModeToggle } from "@/components/shared/DarkModeToggle";
 
 const NAV_LINKS = [
   { href: "#about", label: "À propos" },
@@ -53,10 +54,14 @@ export function Navbar() {
           )}
           <li><Link to="/projects" className="px-3 py-2 text-sm hover:text-primary transition-colors">Projets</Link></li>
           <li><Link to="/blog" className="px-3 py-2 text-sm hover:text-primary transition-colors">Blog</Link></li>
+          <li><DarkModeToggle /></li>
         </ul>
-        <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setOpen(!open)}>
+        <div className="flex items-center gap-1 md:hidden">
+          <DarkModeToggle />
+          <Button variant="ghost" size="icon" onClick={() => setOpen(!open)}>
           {open ? <X /> : <Menu />}
-        </Button>
+          </Button>
+        </div>
       </nav>
       {open && (
         <div className="md:hidden bg-background/95 backdrop-blur-sm border-b px-4 py-4">

@@ -20,7 +20,14 @@ export function CertificationForm({ initialData, onSuccess }) {
   const fmtDate = (d) => d ? new Date(d).toISOString().split("T")[0] : "";
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: initialData ? { ...initialData, issueDate: fmtDate(initialData.issueDate), expiryDate: fmtDate(initialData.expiryDate) } : {},
+    defaultValues: initialData ? {
+      title: initialData.title || "",
+      issuer: initialData.issuer || "",
+      issueDate: fmtDate(initialData.issueDate),
+      expiryDate: fmtDate(initialData.expiryDate),
+      credentialId: initialData.credentialId || "",
+      credentialUrl: initialData.credentialUrl || "",
+    } : {},
   });
 
   async function onSubmit(data) {
